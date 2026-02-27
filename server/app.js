@@ -46,7 +46,7 @@ app.get('/api/health', (req, res) => {
 
 // API routes will be added here
  app.use('/api/auth', require('./src/routes/auth.routes'));
-//  app.use('/api/posts', require('./src/routes/posts.routes'));
+ app.use('/api/posts', require('./src/routes/posts.routes'));
 //  app.use('/api/categories', require('./src/routes/categories.routes'));
 //  app.use('/api/users', require('./src/routes/users.routes'));
 //  app.use('/api/upload', require('./src/routes/upload.routes'));

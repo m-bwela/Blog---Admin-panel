@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/context/AuthContext";
 
 // Layouts
 import AdminLayout from "@/components/layout/AdminLayout";
 import PublicLayout from "@/components/layout/PublicLayout";
-import ProtectedRoute from "@/components/layout/ProtectedToute";
+import ProtectedRoute from "@/components/layout/ProtectedRoute";
 import AdminRoute from "@/components/layout/AdminRoute";
 
 // Public Pages
@@ -24,11 +25,10 @@ import UsersPage from "@/pages/admin/UsersPage";
 // 404 Page
 import NotFoundPage from "@/NotFoundPage/NotFoundPage";
 
-export default function App() {
+function AppRoutes() {
     const user = null; // Replace with actual user state from context or redux
 
     return (
-        <BrowserRouter>
             <Routes>
                 {/* Public Routes */}
                 <Route element={<PublicLayout />}>
@@ -57,6 +57,15 @@ export default function App() {
                 {/* 404 Route */}
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
-        </BrowserRouter>
     );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+        <AuthProvider>
+            <AppRoutes />
+        </AuthProvider>
+    </BrowserRouter>
+  )
 }
