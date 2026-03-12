@@ -150,3 +150,53 @@ exports.getMe = async (req, res, next) => {
         next(error);
     }
 };
+
+// ============================================================
+// UPDATE CURRENT USER PROFILE
+// Route: PUT /api/auth/me
+// ============================================================
+exports.updateMe = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const { name, email, password, bio, avatar } = req.body;
+
+        const updateData = {};
+        if (name !== undefined) updateData.name = name;
+        if (email !== undefined) updateData.email = email;
+        if (bio !== undefined) updateData.bio = bio;
+        if (avatar !== undefined) updateData.avatar = avatar;
+
+        // If password provided, hash it
+        if (password) {
+            const bcrypt = require('bcryptjs');
+            updateData.password = await bcrypt.hash(password, 12);
+        }
+
+        // If user tries to change email, make sure it's not taken by another user
+        if (email) {
+            const existing = await prisma.user.findUnique({ where: { email } });
+            if (existing && existing.id !== userId) {
+                return res.status(400).json({ success: false, message: 'Email already in use' });
+            }
+        }
+
+        const updated = await prisma.user.update({
+            where: { id: userId },
+            data: updateData,
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+                avatar: true,
+                bio: true,
+                createdAt: true,
+                updatedAt: true
+            }
+        });
+
+        res.json({ success: true, message: 'Profile updated', data: { user: updated } });
+    } catch (error) {
+        next(error);
+    }
+};

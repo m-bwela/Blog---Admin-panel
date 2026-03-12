@@ -12,7 +12,7 @@ module.exports = async function authMiddleware(req, res, next) {
             });
         }
 
-        const token = authHeader.split('')[1];
+        const token = authHeader.split(' ')[1];
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         const user = await prisma.user.findUnique({

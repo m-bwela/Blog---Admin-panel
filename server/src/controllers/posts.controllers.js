@@ -210,11 +210,11 @@ exports.createPost = async (req, res, next) => {
                 publishedAt: status === 'PUBLISHED' ? new Date() : null,
                 authorId: req.user.id,
                 categoryId: categoryId || null,
-                ...categoryId(tags && tags.length > 0 && {
+                ...(tags && tags.length > 0 ? {
                     tags: {
                         create: tags.map(tagId => ({ tagId })),
                     },
-                }),
+                } : {}),
             },
             include: {
                 author: { select: { id: true, name: true } },

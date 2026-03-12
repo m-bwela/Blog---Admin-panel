@@ -30,3 +30,15 @@ api.interceptors.response.use(
 );
 
 export default api;
+
+// Upload a single image (FormData expected)
+export async function uploadImage(formData) {
+    return api.post('/upload/image', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    });
+}
+
+// Update current user's profile. Accepts JSON body. For avatars, upload first and pass the URL here.
+export async function updateUserProfile(data) {
+    return api.put('/auth/me', data);
+}
