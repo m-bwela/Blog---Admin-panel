@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: hsl(0 0% 100%);
-  --color-foreground: hsl(222.2 84% 4.9%);
-  --color-card: hsl(0 0% 100%);
-  --color-card-foreground: hsl(222.2 84% 4.9%);
-  --color-popover: hsl(0 0% 100%);
-  --color-popover-foreground: hsl(222.2 84% 4.9%);
-  --color-primary: hsl(222.2 47.4% 11.2%);
-  --color-primary-foreground: hsl(210 40% 98%);
-  --color-secondary: hsl(210 40% 96.1%);
-  --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
-  --color-muted: hsl(210 40% 96.1%);
-  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
-  --color-accent: hsl(210 40% 96.1%);
-  --color-accent-foreground: hsl(222.2 47.4% 11.2%);
-  --color-destructive: hsl(0 84.2% 60.2%);
-  --color-destructive-foreground: hsl(210 40% 98%);
-  --color-border: hsl(214.3 31.8% 91.4%);
-  --color-input: hsl(214.3 31.8% 91.4%);
-  --color-ring: hsl(222.2 84% 4.9%);
+  /* Palette mapped from user colors:
+     #D9CCC1 (light beige), #0D0907 (dark), #735E51 (brown),
+     #A68F81 (muted tan), #40271E (deep brown)
+  */
+
+  /* Light theme (default) */
+  --color-background: #D9CCC1; /* page background */
+  --color-foreground: #0D0907; /* main text */
+  --color-card: #FFFFFF; /* surface/card background */
+  --color-card-foreground: #0D0907;
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #0D0907;
+
+  /* Primary / accents */
+  --color-primary: #735E51; /* primary buttons, links */
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #A68F81; /* secondary elements */
+  --color-secondary-foreground: #0D0907;
+  --color-accent: #40271E; /* strong accent */
+  --color-accent-foreground: #FFFFFF;
+
+  /* Muted / borders */
+  --color-muted: #D9CCC1;
+  --color-muted-foreground: #735E51;
+  --color-destructive: #40271E;
+  --color-destructive-foreground: #FFFFFF;
+
+  --color-border: #C8BEB6; /* subtle border (derived) */
+  --color-input: #EDE6E1;  /* input background */
+  --color-ring: #735E51;
+
   --radius: 0.5rem;
+}
+
+/* Dark theme overrides when .dark class is present on html */
+.dark {
+  --color-background: #0D0907;
+  --color-foreground: #D9CCC1;
+  --color-card: #40271E;
+  --color-card-foreground: #D9CCC1;
+  --color-popover: #40271E;
+  --color-popover-foreground: #D9CCC1;
+
+  --color-primary: #A68F81;
+  --color-primary-foreground: #0D0907;
+  --color-secondary: #735E51;
+  --color-secondary-foreground: #D9CCC1;
+  --color-accent: #D9CCC1;
+  --color-accent-foreground: #0D0907;
+
+  --color-muted: #40271E;
+  --color-muted-foreground: #A68F81;
+  --color-destructive: #A68F81;
+  --color-destructive-foreground: #0D0907;
+
+  --color-border: #2E241E;
+  --color-input: #3A2A23;
+  --color-ring: #A68F81;
 }
 
 @layer base {

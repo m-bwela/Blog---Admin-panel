@@ -1,9 +1,12 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, FileText, Users, Image, Settings, LogOut } from "lucide-react";
+import { useState, useEffect } from 'react';
+import { LayoutDashboard, FileText, Users, Image, Settings, LogOut, Tag, List } from "lucide-react";
 
 const sidebarLinks = [
   { to: "/admin", icon: LayoutDashboard, label: "Dashboard" },
   { to: "/admin/posts", icon: FileText, label: "Posts" },
+  { to: "/admin/categories", icon: List, label: "Categories" },
+  { to: "/admin/tags", icon: Tag, label: "Tags" },
   { to: "/admin/users", icon: Users, label: "Users" },
   { to: "/admin/images", icon: Image, label: "Images" },
   { to: "/admin/settings", icon: Settings, label: "Settings" },
@@ -58,9 +61,18 @@ export default function AdminLayout() {
         <header className="h-16 border-b bg-background flex items-center justify-between px-6">
           <h1 className="text-lg font-semibold">Dashboard</h1>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground">Admin User</span>
-            <div className="h-8 w-8 rounded-full bg-primary" />
-          </div>
+              <button
+                onClick={() => {
+                  const next = !(document.documentElement.classList.contains('dark'));
+                  if (next) document.documentElement.classList.add('dark');
+                  else document.documentElement.classList.remove('dark');
+                  try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch(e){}
+                }}
+                className="px-3 py-1 rounded bg-muted/20"
+              ><span>🌙</span><span>☀️</span></button>
+              <span className="text-sm text-muted-foreground">Admin User</span>
+              <div className="h-8 w-8 rounded-full bg-primary" />
+            </div>
         </header>
 
         {/* Page Content */}

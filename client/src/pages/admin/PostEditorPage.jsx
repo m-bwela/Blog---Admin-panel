@@ -379,10 +379,6 @@ export default function PostEditorPage() {
                   onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
                 >
                   <option value="">Select a category...</option>
-                  <option value="">Technology</option>
-                  <option value="">Lifestyle</option>
-                  <option value="">Education</option>
-                  <option value="">Health</option>
                   {categories.map((category) => (
                     <option key={category.id} value={category.id}>
                       {category.name}

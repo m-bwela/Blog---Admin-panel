@@ -4,6 +4,11 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function PublicLayout() {
   const { user, logout } = useAuth();
+  const [dark, setDark] = useState(() => {
+    try {
+      return localStorage.getItem('theme') === 'dark';
+    } catch (e) { return false; }
+  });
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -17,13 +22,19 @@ export default function PublicLayout() {
     return () => document.removeEventListener('click', onDocClick);
   }, []);
 
+  useEffect(() => {
+    if (dark) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+  }, [dark]);
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Navbar */}
       <header className="border-b bg-background">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="text-xl font-bold">
-            Blog
+            ITTYBIZ
           </Link>
           <nav className="flex items-center gap-6">
             <Link to="/blog" className="text-sm hover:text-primary">
@@ -88,6 +99,14 @@ export default function PublicLayout() {
                 )}
               </div>
             )}
+            {/* Dark mode toggle */}
+            <button
+              onClick={() => setDark(d => !d)}
+              className="ml-2 p-2 rounded-md bg-muted/20"
+              aria-label="Toggle dark mode"
+            >
+              {dark ? '☀️' : '🌙'}
+            </button>
           </nav>
         </div>
       </header>
@@ -105,6 +124,9 @@ export default function PublicLayout() {
               © 2026 Blog. All rights reserved.
             </p>
             <nav className="flex gap-6">
+              <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
+                Home
+              </Link>
               <Link to="/blog" className="text-sm text-muted-foreground hover:text-foreground">
                 Blog
               </Link>

@@ -11,6 +11,7 @@ import AdminRoute from "@/components/layout/AdminRoute";
 import HomePage from "@/pages/public/HomePage";
 import BlogPage from "@/pages/public/BlogPage";
 import PostPage from "@/pages/public/PostPage";
+import UserProfilePage from "@/profile/UserProfilePage";
 
 // Auth Pages
 import LoginPage from "@/pages/auth/LoginPage";
@@ -21,6 +22,8 @@ import DashboardPage from "@/pages/admin/DashboardPage";
 import PostsPage from "@/pages/admin/PostsPage";
 import PostEditorPage from "@/pages/admin/PostEditorPage";
 import UsersPage from "@/pages/admin/UsersPage";
+import CategoriesPage from "@/pages/admin/CategoriesPage";
+import TagsPage from "@/pages/admin/TagsPage";
 
 // 404 Page
 import NotFoundPage from "@/NotFoundPage/NotFoundPage";
@@ -34,6 +37,7 @@ function AppRoutes() {
                 <Route element={<PublicLayout />}>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/blog" element={<BlogPage />} />
+                    <Route path="/profile" element={<UserProfilePage />} />
                     <Route path="/blog/:slug" element={<PostPage />} />
                     <Route path="/category/:slug" element={<BlogPage />} />
                     <Route path="/tag/:slug" element={<BlogPage />} />
@@ -51,6 +55,8 @@ function AppRoutes() {
                         <Route path="/admin/posts/new" element={<PostEditorPage />} />
                         <Route path="/admin/posts/:id/edit" element={<PostEditorPage />} />
                         <Route path="/admin/users" element={<UsersPage />} />
+                        <Route path="/admin/categories" element={<CategoriesPage />} />
+                        <Route path="/admin/tags" element={<TagsPage />} />
                     </Route>
                 </Route>
 
