@@ -14,7 +14,8 @@
 .not-found-code {
   font-size: 8rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #7c3aed, #a78bfa, #c084fc);
+  /* use theme variables for gradient based on project palette */
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -25,12 +26,12 @@
 .not-found-title {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #e0d4ff;
+  color: var(--color-foreground);
   margin-bottom: 1rem;
 }
 
 .not-found-text {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-muted-foreground);
   font-size: 1.1rem;
   margin-bottom: 2rem;
   line-height: 1.6;
@@ -39,13 +40,13 @@
 .not-found-btn {
   display: inline-block;
   padding: 0.8rem 2rem;
-  background: linear-gradient(135deg, #7c3aed, #a78bfa);
-  color: #fff;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: var(--color-primary-foreground);
   font-weight: 600;
   border-radius: 2rem;
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
 
 .not-found-btn:hover {
