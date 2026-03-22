@@ -160,7 +160,7 @@ export default function BlogPage() {
               className="pl-10"
             />
           </div>
-          <Button type="submit">Search</Button>
+          <Button type="submit"><i className="fa fa-search"></i></Button>
         </form>
       </div>
 

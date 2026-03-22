@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { uploadImage, updateUserProfile } from "@/lib/api";
 
 export default function UserProfilePage() {
     const { user, updateUser } = useAuth();
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         name: user?.name || "",
         email: user?.email || "",
         avatar: user?.avatar || "",
         password: "",
+        confirmPassword: "",
     });
 
     // Handle input changes
@@ -25,6 +28,11 @@ export default function UserProfilePage() {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // Validate password confirmation
+        if (form.password && form.password !== form.confirmPassword) {
+            alert('Password does not match');
+            return;
+        }
 
         try {
             let avatarUrl = form.avatar;
@@ -52,9 +60,12 @@ export default function UserProfilePage() {
             updateUser(updatedUser);
 
             // Clear password from form
-            setForm((prev) => ({ ...prev, password: '' }));
+            setForm((prev) => ({ ...prev, password: '', confirmPassword: '' }));
 
             alert('Profile updated successfully');
+
+            // Redirect to homepage
+            navigate('/');
         } catch (error) {
             console.error(error);
             alert(error.response?.data?.message || 'Failed to update profile');
@@ -108,6 +119,16 @@ export default function UserProfilePage() {
                     />
                 </label>
                 <br />
+                <label className="block">
+                    <span className="text-sm font-medium">Confirm Password:</span>
+                    <input
+                        type="password"
+                        name="confirmPassword"
+                        value={form.confirmPassword}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 sm:text-sm"
+                    />
+                </label>
                 <button
                     type="submit"
                     className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"

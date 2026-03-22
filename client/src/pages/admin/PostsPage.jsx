@@ -273,9 +273,9 @@ export default function PostsPage() {
               <option value="DRAFT">Draft</option>
               <option value="ARCHIVED">Archived</option>
             </select>
-
+              
             {/* Search Button */}
-            <Button type="submit">Search</Button>
+            <Button type="submit"><i className="fa fa-search"></i></Button>
           </form>
         </CardContent>
       </Card>
