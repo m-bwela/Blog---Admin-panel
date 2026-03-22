@@ -1,16 +1,72 @@
-# React + Vite
+# Blog + Admin Panel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository is a full-stack blog and admin panel application built with a React + Vite frontend and a Node/Express backend using Prisma for database access.
 
-Currently, two official plugins are available:
+Purpose
+- Provide a simple, extendable blog platform with an admin UI to manage posts, categories, tags, and users.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Key Features
+- Public blog listing and post pages with categories and tags
+- Admin area for creating, editing, publishing, and managing posts
+- User profiles with avatar upload and password update
+- Rich text editor for post content
+- Dark mode and theming via CSS variables
+- Dynamic sitemap support and SEO-friendly routes
 
-## React Compiler
+Tech Stack
+- Frontend: React, Vite, Tailwind CSS (utility classes), React Router
+- Backend: Node.js, Express, Prisma ORM, SQLite/Postgres (configurable via Prisma)
+- Authentication: JWT-based auth on the server, React Context on the client
+- Image uploads: Multer on server, stored in `/uploads`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Quick Start (Development)
+1. Install dependencies for both client and server:
 
-## Expanding the ESLint configuration
+```bash
+# from repository root
+cd server
+npm install
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+cd ../client
+npm install
+```
+
+2. Run the server and client in separate terminals:
+
+```bash
+# server
+cd server
+npm run dev
+
+# client (Vite)
+cd client
+npm run dev
+```
+
+Environment
+- Copy `.env.example` or set environment variables for `DATABASE_URL`, `CLIENT_URL`, `JWT_SECRET`, etc., in the `server` folder.
+
+Database
+- This project uses Prisma. To apply schema changes or run migrations:
+
+```bash
+cd server
+npx prisma migrate dev
+```
+
+Important Files
+- Frontend entry: `client/src/main.jsx`
+- Frontend routes and pages: `client/src/pages`
+- Profile page: `client/src/profile/UserProfilePage.jsx`
+- Backend server: `server/app.js` and `server/server.js`
+- API routes: `server/src/routes`
+- Prisma schema: `server/prisma/schema.prisma`
+
+Deployment
+- The project includes Dockerfiles and a `docker-compose` configuration for production-ready deployment. See `/DEPLOY.md` at the repo root for step-by-step instructions.
+
+Contributing
+- Feel free to open issues or pull requests. Follow existing code style and keep changes small and focused.
+
+License
+- MIT
